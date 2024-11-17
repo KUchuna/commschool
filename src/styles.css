@@ -6,3 +6,109 @@
 * {
     font-family: "inter";
 }
+
+#list-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+}
+
+.card-description {
+    color: #606060;
+    max-width: 250px;
+}
+
+.card-original-price {
+    text-decoration: line-through;
+    color: #8B96A5;
+    margin-left: 6px;
+}
+
+.card-rating-container {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #FF9017;
+}
+
+.card-star-container {
+    display: flex;
+    align-items: center;
+}
+
+.card-star-container img {
+    width: 16px;
+    height: 16px;
+}
+
+.card-price-rating-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-description-container {
+    padding: 20px 18px;
+    border-top: 1px solid #EFF2F4;
+    width: 100%;
+}
+
+.card-container {
+    background-color: white;
+    border: 1px solid #DEE2E7;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-thumbnail {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    clip-path: inset(5% 25% 5% 25%);
+}
+
+
+.single-item {
+    padding: 11px 18px;
+    background-color: white;
+    border: 1px solid #DEE2E7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    border-radius: 6px;
+}
+
+.single-item:hover {
+    background-color: #DEE2E7;
+}
+
+.active {
+    background-color: #DEE2E7;
+    color: #8B96A5;
+}
+
+#page-size   {
+    padding: .3125rem 3rem .3125rem 1rem;
+    background-image: url('../public/assets/logos/selectarrow.svg');
+    background-repeat: no-repeat, repeat;
+    background-position: right 1rem center;
+    border-radius: .25rem;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    border: 1px solid #d8e2ef;
+    color: #344040;
+    background-size: 24px;
+    background-color: #fff;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.075);
+    outline:none;
+    cursor: pointer;
+}

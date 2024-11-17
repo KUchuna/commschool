@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles.css">
     <link rel="stylesheet" href="../src/styles.css">
+    <script src="./script.js" defer></script>
     <title>Ecommerce - midterm</title>
 </head>
-<body>
-    <header class="sticky top-0 z-50 bg-white flex items-center justify-center border-b-[1px] border-solid border-[#eef1f1] px-[8.125rem] py-[1.375rem]">
+<body class="bg-[#F7FAFC]">
+    <header class="sticky top-0 z-50 bg-white flex items-center justify-center border-b-[1px] border-solid border-gray-200 px-[8.125rem] py-[1.25rem]">
         <div class="flex items-center justify-between max-w-[1440px] w-full">
             <img src="./assets/logos/headerlogo.svg" alt="logo" class="cursor-pointer"/>
             <div class="w-[50%] flex border-primary border-[2px] rounded-lg">
@@ -32,6 +33,53 @@
         </div>
     </header>
 
+    <nav class="bg-white flex items-center justify-center border-b-[1px] border-solid border-gray-200 px-[8.125rem] py-[1rem]">
+        <div class="flex items-center justify-between max-w-[1440px] w-full">
+            <ul class="flex gap-[1.563rem]">
+                <li class="cursor-pointer font-medium flex items-center gap-2"><img src="./assets/logos/navham.svg"/>All category</li>
+                <li class="cursor-pointer font-medium">Hot offers</li>
+                <li class="cursor-pointer font-medium">Gift boxes</li>
+                <li class="cursor-pointer font-medium">Projects</li>
+                <li class="cursor-pointer font-medium">Menu item</li>
+                <li class="cursor-pointer font-medium flex items-center gap-2">Help <img src="./assets/logos/downarrow.svg" /></li>
+            </ul>
+            <ul class="flex items-center gap-[1.563rem]">
+                <li class="flex items-center gap-2 cursor-pointer">English, USD <img src="./assets/logos/downarrow.svg"/></li>
+                <li class="flex items-center gap-2 cursor-pointer">Ship to <img src="./assets/logos/German.svg" /> <img src="./assets/logos/downarrow.svg"/></li>
+            </ul>
+        </div>
+    </nav>
 
-</body>
+    <div class="flex items-center justify-center px-[8.125rem] py-[1rem]">
+        <div class="flex items-center justify-between max-w-[1440px] w-full">
+            <ul class="flex gap-2">
+                <li class="text-text-gray flex gap-2 cursor-pointer hover:underline">Home <img src="./assets/logos/rightarrow.svg" alt=""></li>
+                <li class="text-text-gray flex gap-2 cursor-pointer hover:underline">Clothings <img src="./assets/logos/rightarrow.svg" alt=""></li>
+                <li class="text-text-gray flex gap-2 cursor-pointer hover:underline">Men's wear <img src="./assets/logos/rightarrow.svg" alt=""></li>
+                <li class="text-text-gray flex gap-2 cursor-pointer hover:underline">Summer clothing</li>
+            </ul>
+        </div>  
+    </div>
+
+    <div class="flex items-center justify-center px-[8.125rem]">
+        <div class="flex items-center justify-between max-w-[1440px] w-full border-[1px] border-solid border-gray-200 bg-white py-[0.688rem] px-[0.625rem] rounded-lg">
+            <p>16 items in <strong>Mobile phones</strong></p>
+        </div>  
+    </div>  
+
+    <section class="flex items-center justify-center px-[8.125rem] py-[1rem] flex-col">
+        <div class="max-w-[1440px] w-full mb-[1.875rem]" id="list-container">
+
+        </div>
+        <div class="flex max-w-[1440px] w-full gap-2">
+            <select class="ml-auto border-[1px] border-[#DEE2E7] rounded-[6px] outline-none px-[10px]" id="page-size">
+                <option value="9">Show 9</option>
+                <option value="13">Show 13</option>
+                <option value="16">Show all</option>
+            </select>
+            <div class="pagination flex gap-2"></div>
+        </div>
+    </section>
+    
+    </body>
 </html>
