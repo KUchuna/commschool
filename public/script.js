@@ -73,6 +73,8 @@ getData()
 
 const onPaginationClick = (nextPage) => {
   currentPage = nextPage
+  sortValue = "default"
+  sortingSelect.value = sortValue
   drawList(data.products)
 }
 
@@ -103,9 +105,45 @@ const drawPagination = (listings) => {
   }
 };
 
+const sortingSelect = document.getElementById('sorting');
+
+let sortValue = "default";
+
 pageSizeSelect.addEventListener('change', () => {
   pageSize = parseInt(pageSizeSelect.value, 10);
   currentPage = 1; 
-  drawPagination(data.products);
-  drawList(data.products); 
+  sortValue = "default"
+  sortingSelect.value = sortValue
+  applySortingAndRedraw();
 });
+
+sortingSelect.addEventListener('change', () => {
+  sortValue = sortingSelect.value;
+  currentPage = 1;
+  applySortingAndRedraw();
+});
+
+function applySortingAndRedraw() {
+
+  let sortedData = [...data.products];
+
+  switch (sortValue) {
+    case 'price-ascending':
+      sortedData.sort((a, b) => a.price - b.price);
+      break;
+    case 'price-descending':
+      sortedData.sort((a, b) => b.price - a.price);
+      break;
+    case 'top-rating':
+      sortedData.sort((a, b) => b.rating - a.rating);
+      break;
+    case 'least-rating':
+      sortedData.sort((a, b) => a.rating - b.rating);
+      break;
+    default:
+      sortedData = [...data.products];
+  }
+
+  drawPagination(sortedData); 
+  drawList(sortedData); 
+}
