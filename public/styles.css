@@ -592,16 +592,32 @@ video {
   margin-left: auto;
 }
 
+.mb-\[0\.938rem\] {
+  margin-bottom: 0.938rem;
+}
+
 .flex {
   display: flex;
+}
+
+.hidden {
+  display: none;
+}
+
+.h-\[18px\] {
+  height: 18px;
 }
 
 .h-\[20px\] {
   height: 20px;
 }
 
-.h-\[18px\] {
-  height: 18px;
+.w-\[120px\] {
+  width: 120px;
+}
+
+.w-\[18px\] {
+  width: 18px;
 }
 
 .w-\[20px\] {
@@ -619,10 +635,6 @@ video {
 .w-max {
   width: -moz-max-content;
   width: max-content;
-}
-
-.w-\[18px\] {
-  width: 18px;
 }
 
 .max-w-\[1440px\] {
@@ -667,6 +679,10 @@ video {
   gap: 0.5rem;
 }
 
+.gap-5 {
+  gap: 1.25rem;
+}
+
 .gap-\[0\.625rem\] {
   gap: 0.625rem;
 }
@@ -679,12 +695,12 @@ video {
   gap: 1.563rem;
 }
 
-.gap-\[3px\] {
-  gap: 3px;
-}
-
 .gap-\[17px\] {
   gap: 17px;
+}
+
+.gap-\[3px\] {
+  gap: 3px;
 }
 
 .rounded-\[6px\] {
@@ -695,14 +711,14 @@ video {
   border-radius: 0.5rem;
 }
 
-.rounded-l-lg {
-  border-top-left-radius: 0.5rem;
-  border-bottom-left-radius: 0.5rem;
-}
-
 .rounded-l-\[6px\] {
   border-top-left-radius: 6px;
   border-bottom-left-radius: 6px;
+}
+
+.rounded-l-lg {
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
 }
 
 .rounded-r-\[6px\] {
@@ -749,10 +765,6 @@ video {
   border-color: rgb(13 110 253 / var(--tw-border-opacity, 1));
 }
 
-.border-\[\] {
-  border-color: ;
-}
-
 .border-t-\[\#DEE2E7\] {
   --tw-border-opacity: 1;
   border-top-color: rgb(222 226 231 / var(--tw-border-opacity, 1));
@@ -795,9 +807,9 @@ video {
   padding-right: 1rem;
 }
 
-.px-\[0\.625rem\] {
-  padding-left: 0.625rem;
-  padding-right: 0.625rem;
+.px-5 {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
 }
 
 .px-\[10px\] {
@@ -820,6 +832,11 @@ video {
   padding-bottom: 2.5rem;
 }
 
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
 .py-\[0\.625rem\] {
   padding-top: 0.625rem;
   padding-bottom: 0.625rem;
@@ -828,11 +845,6 @@ video {
 .py-\[0\.688rem\] {
   padding-top: 0.688rem;
   padding-bottom: 0.688rem;
-}
-
-.py-\[1\.25rem\] {
-  padding-top: 1.25rem;
-  padding-bottom: 1.25rem;
 }
 
 .py-\[1\.313rem\] {
@@ -856,6 +868,14 @@ video {
 
 .pt-\[1rem\] {
   padding-top: 1rem;
+}
+
+.pb-\[1rem\] {
+  padding-bottom: 1rem;
+}
+
+.pb-\[1\.875rem\] {
+  padding-bottom: 1.875rem;
 }
 
 .text-\[1\.25rem\] {
@@ -972,12 +992,20 @@ video {
   align-items: center;
 }
 
+.card-title {
+  display: none;
+}
+
 .card-thumbnail {
   width: 100%;
   height: auto;
   -o-object-fit: cover;
      object-fit: cover;
   clip-path: inset(5% 25% 5% 25%);
+}
+
+.card-shipping-container {
+  display: none;
 }
 
 .single-item {
@@ -1114,6 +1142,102 @@ label:hover:before {
   background: #ffffff
 }
 
+@media (max-width: 768px) {
+  #list-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-container {
+    flex-direction: row;
+  }
+
+  .card-description-container {
+    padding: 12px 30px 14px 15px;
+  }
+
+  .card-description {
+    display: none;
+  }
+
+  .card-thumbnail {
+    width: 84px;
+    height: 84px;
+  }
+
+  .card-title {
+    display: initial;
+    color: #505050;
+  }
+
+  .card-title-price-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-original-price {
+    display: none;
+  }
+
+  .card-favorite-icon {
+    display: none;
+  }
+
+  .card-shipping-container {
+    display: initial;
+    color: #00B517;
+  }
+}
+
 .hover\:underline:hover {
   text-decoration-line: underline;
+}
+
+@media (min-width: 768px) {
+  .md\:mb-\[1\.875rem\] {
+    margin-bottom: 1.875rem;
+  }
+
+  .md\:mb-0 {
+    margin-bottom: 0px;
+  }
+
+  .md\:block {
+    display: block;
+  }
+
+  .md\:flex {
+    display: flex;
+  }
+
+  .md\:hidden {
+    display: none;
+  }
+
+  .md\:w-\[initial\] {
+    width: initial;
+  }
+
+  .md\:rounded-lg {
+    border-radius: 0.5rem;
+  }
+
+  .md\:px-\[0\.625rem\] {
+    padding-left: 0.625rem;
+    padding-right: 0.625rem;
+  }
+
+  .md\:px-\[8\.125rem\] {
+    padding-left: 8.125rem;
+    padding-right: 8.125rem;
+  }
+
+  .md\:py-\[1\.25rem\] {
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+  }
+
+  .md\:pb-\[10\.5rem\] {
+    padding-bottom: 10.5rem;
+  }
 }

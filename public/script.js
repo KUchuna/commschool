@@ -35,11 +35,13 @@ function drawList(listings) {
       <div class="card-description-container">
         <div class="card-price-rating-container">
           <div>
-            <div>
+            <div class="card-title-price-container">
+              <p class="card-title">${listing.title}</p>
               <strong>$${listing.price}</strong>
               <span class="card-original-price">$${Math.round(listing.price+listing.price*listing.discountPercentage/100)}.00</span>
             </div>
             <div class="card-rating-container"><div class="card-star-container"></div>${listing.rating}</div>
+            <p class="card-shipping-container">Free Shipping</p>
           </div>
           <div class="card-favorite-icon"></div>
         </div>
