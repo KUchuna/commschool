@@ -1,6 +1,6 @@
-import navham from "../../public/logos/navham.svg";
-import downarrow from "../../public/logos/downarrow.svg";
-import german from "../../public/logos/german.svg";
+import navham from "/logos/navham.svg";
+import downarrow from "/logos/downarrow.svg";
+import german from "/logos/german.svg";
 
 export default function NavBar() { 
     return (

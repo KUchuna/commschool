@@ -1,10 +1,10 @@
-import headerlogo from "../../public/logos/headerlogo.svg";
-import profile from "../../public/logos/profile.svg";
-import message from "../../public/logos/message.svg";
-import orders from "../../public/logos/orders.svg";
-import cart from "../../public/logos/cart.svg";
-import mobilecart from "../../public/logos/mobilecarrt.svg";
-import mobileprofile from "../../public/logos/mobileprofile.svg";
+import headerlogo from "/logos/headerlogo.svg";
+import profile from "/logos/profile.svg";
+import message from "/logos/message.svg";
+import orders from "/logos/orders.svg";
+import cart from "/logos/cart.svg";
+import mobilecart from "/logos/mobilecarrt.svg";
+import mobileprofile from "/logos/mobileprofile.svg";
 import NavBar from "./NavBar";
 
 

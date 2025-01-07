@@ -1,12 +1,24 @@
 import BreadCrumbs from "./components/BreadCrumbs";
+import CardsGrid from "./components/CardsGrid";
 import Header from "./components/Header";
+import SortingBar from "./components/SortingBar";
+import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
+
+const queryClient = new QueryClient()
 
 export default function App() {
   return (
     <>
-      <Header />
-      {/* Static breadcrumbs component */}
-      <BreadCrumbs />
+    <QueryClientProvider client={queryClient}>
+        <Header />
+        {/* Static breadcrumbs component */}
+        <BreadCrumbs />
+        <SortingBar />
+        <CardsGrid />
+    </QueryClientProvider>
     </>
   )
 }

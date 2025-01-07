@@ -1,4 +1,4 @@
-import rightarrow from "../../public/logos/rightarrow.svg";
+import rightarrow from "/logos/rightarrow.svg";
 
 export default function BreadCrumbs() {
     return (
