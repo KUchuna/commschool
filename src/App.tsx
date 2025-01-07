@@ -1,10 +1,12 @@
-function App() {
+import BreadCrumbs from "./components/BreadCrumbs";
+import Header from "./components/Header";
 
+export default function App() {
   return (
-    <div className="bg-red-600">
-      Hello world
-    </div>
+    <>
+      <Header />
+      {/* Static breadcrumbs component */}
+      <BreadCrumbs />
+    </>
   )
 }
-
-export default App
