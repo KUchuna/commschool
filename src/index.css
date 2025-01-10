@@ -8,13 +8,13 @@
   font-family: "inter";
 }
 
-#list-container {
+/* #list-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
   grid-column-gap: 20px;
   grid-row-gap: 20px;
-}
+} */
 
 .card-description {
   color: #606060;
@@ -65,6 +65,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 32%;
 }
 
 .card-title {
@@ -105,7 +106,7 @@
 
 #page-size, #sorting  {
   padding: .3125rem 3rem .3125rem 1rem;
-  background-image: url('../public/assets/logos/selectarrow.svg');
+  background-image: url('/logos/downarrow.svg');
   background-repeat: no-repeat, repeat;
   background-position: right 1rem center;
   border-radius: .25rem;

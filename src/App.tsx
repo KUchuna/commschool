@@ -14,7 +14,6 @@ export default function App() {
     <>
     <QueryClientProvider client={queryClient}>
         <Header />
-        {/* Static breadcrumbs component */}
         <BreadCrumbs />
         <SortingBar />
         <CardsGrid />
