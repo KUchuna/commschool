@@ -6,14 +6,16 @@ import cart from "/logos/cart.svg";
 import mobilecart from "/logos/mobilecarrt.svg";
 import mobileprofile from "/logos/mobileprofile.svg";
 import NavBar from "./NavBar";
-
+import { Link } from "react-router-dom";
 
 export default function Header() {
   return (
     <>
         <header className="sticky top-0 z-50 bg-white flex items-center justify-center border-b-[1px] border-solid border-gray-200 md:px-[8.125rem] md:py-[1.25rem] px-5 py-4">
             <div className="flex items-center justify-between max-w-[1440px] w-full">
-                <img src={headerlogo} alt="logo" className="cursor-pointer w-[120px] md:w-[initial]"/>
+                <Link to="/">
+                    <img src={headerlogo} alt="logo" className="cursor-pointer w-[120px] md:w-[initial]"/>
+                </Link>
                 <div className="w-[50%] md:flex hidden border-primary border-[2px] rounded-lg">
                     <input type="text" name="search" id="search"
                     placeholder="Search" className="w-full rounded-l-lg border-r-[1px] border-primary px-[10px] outline-none"/>

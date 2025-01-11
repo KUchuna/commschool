@@ -1,10 +1,8 @@
 import { useQuery } from '@tanstack/react-query'
 import {CardItem} from '../types'
-import heart from '/logos/heart.svg'
-import fullStar from '/logos/fullstar.svg';
-import emptyStar from '/logos/emptystar.svg';
 import Loader from './Loader';
 import { useState } from 'react';
+import ProductCard from './ProductCard';
 
 export default function CardsGrid() {
 
@@ -49,7 +47,7 @@ export default function CardsGrid() {
 
     return (
         <section className="flex items-center justify-center md:px-[8.125rem] pt-[1rem] md:pb-[10.5rem] pb-[1.875rem] flex-col px-5">
-            <div className="max-w-[1440px] w-full mb-[1.875rem] flex flex-wrap justify-start gap-y-[20px] gap-x-7">
+            <div className="max-w-[1440px] w-full mb-[1.875rem] flex flex-wrap justify-center gap-y-[20px] gap-x-4">
                 {isPending ? <div className='flex w-full items-center justify-center mt-40'><Loader /></div>
                 : data.map((item: CardItem, index: number) => {
                     
@@ -57,48 +55,19 @@ export default function CardsGrid() {
                     const emptyStars = 5 - fullStars;
 
                     return (
-                        <div key={index} className="card-container">
-                            <img src={item.thumbnail} className="card-thumbnail" />
-                            <div className="card-description-container">
-                                <div className="card-price-rating-container">
-                                    <div>
-                                        <div className="card-title-price-container">
-                                            <p className="card-title">{item.title}</p>
-                                            <strong>${item.price}</strong>
-                                            <span className="card-original-price">
-                                                {Math.round(item.price + (item.price * item.discountPercentage) / 100)}.00
-                                            </span>
-                                        </div>
-                                        <div className="card-rating-container">
-                                            <div className="card-star-container flex">
-                                                {Array.from({ length: fullStars }).map((_, i) => (
-                                                    <img
-                                                        key={`full-${i}`}
-                                                        src={fullStar}
-                                                        alt="Full Star"
-                                                        className="star-icon"
-                                                    />
-                                                ))}
-                                                {Array.from({ length: emptyStars }).map((_, i) => (
-                                                    <img
-                                                        key={`empty-${i}`}
-                                                        src={emptyStar}
-                                                        alt="Empty Star"
-                                                        className="star-icon"
-                                                    />
-                                                ))}
-                                            </div>
-                                            {item.rating}
-                                        </div>
-                                        <p className="card-shipping-container">Free Shipping</p>
-                                    </div>
-                                    <div className="card-favorite-icon">
-                                        <img src={heart} alt="Favorite Icon" />
-                                    </div>
-                                </div>
-                                <p className="card-description">{item.description.slice(0, 50)}...</p>
-                            </div>
-                        </div>)
+                        <ProductCard 
+                            key={index}
+                            id={item.id} 
+                            thumbnail={item.thumbnail}
+                            title={item.title}
+                            price={item.price}
+                            discountPercentage={item.discountPercentage}
+                            rating={item.rating}
+                            description={item.description}
+                            fullStars={fullStars}
+                            emptyStars={emptyStars}
+                        />
+                    )
                 })}
             </div>
             <div className="flex max-w-[1440px] w-full gap-2">
