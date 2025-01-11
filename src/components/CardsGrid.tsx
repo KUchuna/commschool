@@ -15,6 +15,8 @@ export default function CardsGrid() {
     const fetchProducts = async (): Promise<CardItem[]> => {
         return new Promise((resolve) => {
             setTimeout(async () => {
+                
+                //need to move this in useContext so that it does not refetch on every page change
                 const totalProducts = await fetch(`https://dummyjson.com/products?limit=1000`);
                 const totalProductsData = await totalProducts.json();
                 
@@ -30,10 +32,6 @@ export default function CardsGrid() {
         queryKey: ['products', pageLimit, currentPage],
         queryFn: fetchProducts,
     })
-
-    if (isPending) {
-    return <div className='flex w-full items-center justify-center mt-40'><Loader /></div>
-    }
 
     if (isError) {
     return <span>Error: {error.message}</span>
@@ -51,8 +49,9 @@ export default function CardsGrid() {
 
     return (
         <section className="flex items-center justify-center md:px-[8.125rem] pt-[1rem] md:pb-[10.5rem] pb-[1.875rem] flex-col px-5">
-            <div className="max-w-[1440px] w-full mb-[1.875rem] flex flex-wrap justify-start gap-y-[20px] gap-x-[20px]" id="list-container">
-                {data && data.map((item: CardItem, index: number) => {
+            <div className="max-w-[1440px] w-full mb-[1.875rem] flex flex-wrap justify-start gap-y-[20px] gap-x-7">
+                {isPending ? <div className='flex w-full items-center justify-center mt-40'><Loader /></div>
+                : data.map((item: CardItem, index: number) => {
                     
                     const fullStars = Math.floor(item.rating);
                     const emptyStars = 5 - fullStars;
@@ -113,6 +112,7 @@ export default function CardsGrid() {
                     <option value="12">Show 12</option>
                 </select>
                 <div className="pagination flex gap-2">
+                    <button className='single-item' onClick={() => setCurrentPage(1)}>First</button>
                     {totalPages > 0 &&
                         Array.from({ length: totalPages })
                             .map((_, i) => i)
@@ -130,6 +130,7 @@ export default function CardsGrid() {
                                 </button>
                             ))
                     }
+                    <button className='single-item' onClick={() => setCurrentPage(totalPages)}>Last</button>
                 </div>
             </div>
         </section>
