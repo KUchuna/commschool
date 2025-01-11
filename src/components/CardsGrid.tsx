@@ -6,31 +6,28 @@ import emptyStar from '/logos/emptystar.svg';
 import Loader from './Loader';
 import { useState } from 'react';
 
-
-
 export default function CardsGrid() {
 
-    const [pageSize, setPageSize] = useState(9);
+    const [pageLimit, setPageLimit] = useState(9);
     const [totalPages, setTotalPages] = useState(0);
-    const [fetchedData, setFetchedData] = useState([]);
-    const [slicedData, setSlicedData] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
 
     const fetchProducts = async (): Promise<CardItem[]> => {
         return new Promise((resolve) => {
             setTimeout(async () => {
-                const response = await fetch(`https://dummyjson.com/products`);
+                const totalProducts = await fetch(`https://dummyjson.com/products?limit=1000`);
+                const totalProductsData = await totalProducts.json();
+                
+                const response = await fetch(`https://dummyjson.com/products?limit=${pageLimit}&skip=${pageLimit*(currentPage-1)}`);
                 const data = await response.json();
-                setFetchedData(data.products);
-                setSlicedData(data.products.slice(0, pageSize))
-                setTotalPages(Math.floor(data.products.length / 9));
+                setTotalPages(Math.ceil(totalProductsData.products.length/pageLimit));
                 resolve(data.products);
-            }, 1000);
+            }, 500);
         });
     };
 
     const { isPending, isError, data, error } = useQuery({
-        queryKey: ['products'],
+        queryKey: ['products', pageLimit, currentPage],
         queryFn: fetchProducts,
     })
 
@@ -42,32 +39,20 @@ export default function CardsGrid() {
     return <span>Error: {error.message}</span>
     }
 
-    function handlePageSize(e: React.ChangeEvent<HTMLSelectElement>) {
-        setPageSize(parseInt(e.target.value, 10));
-        data && setTotalPages(Math.floor(data.length / parseInt(e.target.value, 10)));
-        setSlicedData(fetchedData.slice(0, parseInt(e.target.value, 10)));
-        console.log(fetchedData)
+    function handlePagelimit(e: React.ChangeEvent<HTMLSelectElement>) {
+        setPageLimit(parseInt(e.target.value));
+        setCurrentPage(1);
     }
 
-    function handlePageChange(page: number): Promise<void> {
-        setIsLoading(true);
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                const start = page * pageSize;
-                const end = start + pageSize;
-                const slicedData = fetchedData.slice(start, end);
-                setSlicedData(slicedData);
-                setIsLoading(false);
-                resolve();
-            }, 1000);
-        });
+    function handlePageChange(i: number) {
+        setCurrentPage(i + 1);
+        console.log(currentPage)
     }
-    
 
     return (
         <section className="flex items-center justify-center md:px-[8.125rem] pt-[1rem] md:pb-[10.5rem] pb-[1.875rem] flex-col px-5">
-            <div className="max-w-[1440px] w-full mb-[1.875rem] flex flex-wrap justify-between gap-y-[20px]" id="list-container">
-                {isLoading ? <div className='flex w-full items-center justify-center mt-40'><Loader /></div> : (data && slicedData.map((item: CardItem, index: number) => {
+            <div className="max-w-[1440px] w-full mb-[1.875rem] flex flex-wrap justify-start gap-y-[20px] gap-x-[20px]" id="list-container">
+                {data && data.map((item: CardItem, index: number) => {
                     
                     const fullStars = Math.floor(item.rating);
                     const emptyStars = 5 - fullStars;
@@ -115,25 +100,36 @@ export default function CardsGrid() {
                                 <p className="card-description">{item.description.slice(0, 50)}...</p>
                             </div>
                         </div>)
-                }))}
+                })}
             </div>
             <div className="flex max-w-[1440px] w-full gap-2">
                 <select
                     className="ml-auto border-[1px] border-[#DEE2E7] rounded-[6px] outline-none px-[10px]"
-                    id="page-size" onChange={handlePageSize} defaultValue={pageSize}
+                    id="page-size" onChange={(e) => handlePagelimit(e)} value={pageLimit}
                 >
                     <option value="3">Show 3</option>
                     <option value="6">Show 6</option>
                     <option value="9">Show 9</option>
-                    <option value="13">Show 13</option>
-                    <option value="16">Show all</option>
+                    <option value="12">Show 12</option>
                 </select>
                 <div className="pagination flex gap-2">
-                    {Array.from({ length: totalPages }, (_, index) => (
-                        <button key={index} className="single-item" onClick={() => handlePageChange(index)}>
-                            {index + 1}
-                        </button>
-                    ))}
+                    {totalPages > 0 &&
+                        Array.from({ length: totalPages })
+                            .map((_, i) => i)
+                            .filter((i) => 
+                                i >= Math.max(currentPage - 4, 0) && 
+                                i <= Math.min(currentPage + 2, totalPages - 1) 
+                            )
+                            .map((i) => (
+                                <button
+                                    key={i}
+                                    className={`single-item ${i === currentPage-1 ? 'active' : ''}`}
+                                    onClick={() => handlePageChange(i)}
+                                >
+                                    {i + 1}
+                                </button>
+                            ))
+                    }
                 </div>
             </div>
         </section>

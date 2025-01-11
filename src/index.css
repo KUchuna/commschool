@@ -8,14 +8,6 @@
   font-family: "inter";
 }
 
-/* #list-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-  grid-column-gap: 20px;
-  grid-row-gap: 20px;
-} */
-
 .card-description {
   color: #606060;
   max-width: 250px;
