@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useQuery } from '@tanstack/react-query'
 import Loader from "../components/Loader";
+import ProductDetails from "../components/productsPage/ProductDetails";
 
 export default function Product() {
 
@@ -26,9 +27,21 @@ export default function Product() {
 
     return (
         <div>
-            <h1>{data.title}</h1>
-            <p>{data.description}</p>
-            <img src={data.thumbnail} alt={data.title} />
+            {data && 
+                <ProductDetails 
+                    brand={data.brand}
+                    category={data.category}
+                    description={data.description}
+                    discountPercentage={data.discountPercentage}
+                    images={data.images}
+                    price={data.price}
+                    rating={data.rating}
+                    returnPolicy={data.returnPolicy}
+                    stock={data.stock}
+                    title={data.title}
+                    thumbnail={data.thumbnail}
+                />
+            }
         </div>
     )
 }
