@@ -7,6 +7,8 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
+import { ProductsProvider } from './ProductsContext.tsx'
+
 
 const queryClient = new QueryClient()
 
@@ -14,9 +16,11 @@ const queryClient = new QueryClient()
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
       <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+        <ProductsProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </ProductsProvider>
       </QueryClientProvider>
     </StrictMode>
 )

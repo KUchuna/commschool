@@ -1,11 +1,16 @@
+import { useContext } from "react";
 import grid from "/logos/grid.svg";
 import list from "/logos/list.svg";
+import ProductsContext from "../ProductsContext";
 
 export default function SortingBar() { 
+
+    const {productsData} = useContext(ProductsContext);
+
     return (
-        <div className="flex items-center justify-center md:px-[8.125rem] px-5">
+        <div className="flex items-center justify-center md:px-[8.125rem] px-5 bg-[#F7FAFC]">
             <div className="flex items-center justify-between max-w-[1440px] w-full border-[1px] border-solid border-gray-200 bg-white py-[0.688rem] md:px-[0.625rem] md:rounded-lg">
-                <p className="md:block hidden">16 items in <strong>Mobile phones</strong></p>
+                <p className="md:block hidden">{productsData?.length} <strong>Products found</strong></p>
                 <div className="flex items-center justify-between w-full md:w-[initial] gap-[17px]">
                     <div className="md:flex hidden gap-2 items-center">
                         <input type="checkbox" id="verified" name="verified" />

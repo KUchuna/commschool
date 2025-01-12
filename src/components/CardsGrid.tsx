@@ -1,33 +1,35 @@
 import { useQuery } from '@tanstack/react-query'
 import {CardItem} from '../types'
 import Loader from './Loader';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import ProductCard from './ProductCard';
+import ProductsContext from '../ProductsContext';
 
 export default function CardsGrid() {
+
+    const {productsData, searchedProducts} = useContext(ProductsContext);
+
 
     const [pageLimit, setPageLimit] = useState(9);
     const [totalPages, setTotalPages] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
 
+    useEffect(() => {
+        productsData && setTotalPages(Math.ceil(productsData.length/pageLimit));
+    }, [productsData]);
+
     const fetchProducts = async (): Promise<CardItem[]> => {
         return new Promise((resolve) => {
             setTimeout(async () => {
-                
-                //need to move this in useContext so that it does not refetch on every page change
-                const totalProducts = await fetch(`https://dummyjson.com/products?limit=1000`);
-                const totalProductsData = await totalProducts.json();
-                
-                const response = await fetch(`https://dummyjson.com/products?limit=${pageLimit}&skip=${pageLimit*(currentPage-1)}`);
+                const response = await fetch(`https://dummyjson.com/products/search?q=${searchedProducts}&limit=${pageLimit}&skip=${pageLimit*(currentPage-1)}`);
                 const data = await response.json();
-                setTotalPages(Math.ceil(totalProductsData.products.length/pageLimit));
                 resolve(data.products);
             }, 500);
         });
     };
 
     const { isPending, isError, data, error } = useQuery({
-        queryKey: ['products', pageLimit, currentPage],
+        queryKey: ['products', pageLimit, currentPage, searchedProducts],
         queryFn: fetchProducts,
     })
 
@@ -42,11 +44,10 @@ export default function CardsGrid() {
 
     function handlePageChange(i: number) {
         setCurrentPage(i + 1);
-        console.log(currentPage)
     }
 
     return (
-        <section className="flex items-center justify-center md:px-[8.125rem] pt-[1rem] md:pb-[10.5rem] pb-[1.875rem] flex-col px-5">
+        <section className="flex items-center justify-center md:px-[8.125rem] pt-[1rem] md:pb-[10.5rem] pb-[1.875rem] flex-col px-5 bg-[#F7FAFC]">
             <div className="max-w-[1440px] w-full mb-[1.875rem] flex flex-wrap justify-center gap-y-[20px] gap-x-4">
                 {isPending ? <div className='flex w-full items-center justify-center mt-40'><Loader /></div>
                 : data.map((item: CardItem, index: number) => {
