@@ -79,10 +79,11 @@ body, html {
 }
 
 .card-thumbnail {
+  max-width: 230px;
+  max-height: 230px;
   width: 100%;
   height: auto;
-  object-fit: cover;
-  clip-path: inset(5% 25% 5% 25%);
+  object-fit: contain;
 }
 
 .card-shipping-container {
@@ -248,12 +249,9 @@ label:hover:before {
 
 
 @media (max-width: 768px) {
-  #list-container {
-      display: flex;
-      flex-direction: column;
-  }
   .card-container {
       flex-direction: row;
+      width: 100%;
   }
   .card-description-container {
       padding: 12px 30px 14px 15px;

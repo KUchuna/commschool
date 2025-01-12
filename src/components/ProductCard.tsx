@@ -28,7 +28,7 @@ export default function ProductCard(props: ProductCardProps) {
                                 {Array.from({ length: props.emptyStars }).map((_, i) => (
                                     <img
                                         key={`empty-${i}`}
-                                        src="./logos/emptystar.svg"
+                                        src="/logos/emptystar.svg"
                                         alt="Empty Star"
                                         className="star-icon"
                                     />

@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import ProductsContext from '../ProductsContext';
 
-export default function Header() {
+export default function Header({productPage}: {productPage?: boolean}) {
 
     const {searchedProducts, setSearchedProducts} = useContext(ProductsContext);
 
@@ -22,7 +22,7 @@ export default function Header() {
                     <Link to="/">
                         <img src={headerlogo} alt="logo" className="cursor-pointer w-[120px] md:w-[initial]"/>
                     </Link>
-                    <div className="w-[50%] md:flex hidden border-primary border-[2px] rounded-lg">
+                    {productPage ? <></> : <div className="w-[50%] md:flex hidden border-primary border-[2px] rounded-lg">
                         <input type="text" name="search" id="search" value={searchedProducts} onChange={(e) => setSearchedProducts(e.target.value)}
                         placeholder="Search" className="w-full rounded-l-lg border-r-[1px] border-primary px-[10px] outline-none"/>
                         {/* <select className="outline-none mx-[10px]">
@@ -34,7 +34,7 @@ export default function Header() {
                         <button className="bg-primary text-white px-[23px] py-[11px]" onClick={() => setSearchedProducts('')}>
                             Clear
                         </button>
-                    </div>
+                    </div>}
                     <ul className="md:flex hidden gap-[1.438rem] items-center">
                         <li className="flex flex-col items-center gap-2 cursor-pointer"><img src={profile} className="w-[20px] h-[20px]"/><p className="text-gray-2 text-sm">Profile</p></li>
                         <li className="flex flex-col items-center gap-2 cursor-pointer"><img src={message} className="w-[20px] h-[20px]"/><p className="text-gray-2 text-sm">Message</p></li>

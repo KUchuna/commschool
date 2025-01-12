@@ -2,6 +2,8 @@ import { useParams } from "react-router-dom";
 import { useQuery } from '@tanstack/react-query'
 import Loader from "../components/Loader";
 import ProductDetails from "../components/productsPage/ProductDetails";
+import Header from "../components/Header";
+import ProductDescription from "../components/productsPage/ProductDescription";
 
 export default function Product() {
 
@@ -21,17 +23,19 @@ export default function Product() {
     return <span>Error: {error.message}</span>
     }
 
-    if(isPending) {
-        return <div className="flex justify-center w-full"><Loader /></div>
-    }
+    console.log(data)
 
     return (
-        <div>
-            {data && 
+        <>
+            <Header 
+                productPage
+            />
+            {isPending ? (<div className="flex justify-center w-full h-full items-center"><Loader /></div>) :
+            data && 
+            <>
                 <ProductDetails 
                     brand={data.brand}
                     category={data.category}
-                    description={data.description}
                     discountPercentage={data.discountPercentage}
                     images={data.images}
                     price={data.price}
@@ -40,8 +44,22 @@ export default function Product() {
                     stock={data.stock}
                     title={data.title}
                     thumbnail={data.thumbnail}
+                    reviews={data.reviews}
+                    minimumOrderQuantity={data.minimumOrderQuantity}
+                    warrantyInformation={data.warrantyInformation}
                 />
+                <ProductDescription 
+                    description={data.description}
+                    reviews={data.reviews}
+                    category={data.category}
+                />
+                <section className="w-full flex justify-center py-[1rem] px-[8.125rem]">
+                    <div className="max-w-[1440px]">
+                        <img src="/logos/Banner.png" className="cursor-pointer"/>
+                    </div>
+                </section>
+            </>
             }
-        </div>
+        </>
     )
 }
