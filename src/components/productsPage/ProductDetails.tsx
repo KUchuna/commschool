@@ -23,7 +23,11 @@ export default function ProductDetails(props: ProductDetailsProps) {
 
     function handleModalClose() { 
         setShowImageModal(false);
-        setModalIndex(0);
+    }
+
+    function handleImageSelection(i:number) {
+        setSelectedImage(props.images[i]);
+        setModalIndex(i);
     }
 
     return (
@@ -35,7 +39,7 @@ export default function ProductDetails(props: ProductDetailsProps) {
                     </div>
                     <div className="flex gap-2">
                         {props.images.map((image, index) => (
-                            <img key={index} src={image} alt={props.title} className={`w-[56px] h-[56px] object-contain rounded-[6px] border-[2px] border-gray-3 cursor-pointer hover:border-gray-2 ${selectedImage ===image ? "border-primary" : ""}`} onClick={() => setSelectedImage(props.images[index])}/>
+                            <img key={index} src={image} alt={props.title} className={`w-[56px] h-[56px] object-contain rounded-[6px] border-[2px] border-gray-3 cursor-pointer hover:border-gray-2 ${selectedImage ===image ? "border-primary" : ""}`} onClick={() => handleImageSelection(index)}/>
                         ))}
                     </div>
                 </div>
