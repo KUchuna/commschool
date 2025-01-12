@@ -48,7 +48,7 @@ export default function CardsGrid() {
 
     return (
         <section className="flex items-center justify-center md:px-[8.125rem] pt-[1rem] md:pb-[10.5rem] pb-[1.875rem] flex-col px-5 bg-[#F7FAFC]">
-            <div className="max-w-[1440px] w-full mb-[1.875rem] flex flex-wrap justify-between gap-y-[20px] gap-x-4">
+            <div className="max-w-[1440px] w-full mb-[1.875rem] flex flex-wrap md:justify-between justify-center gap-y-[20px] gap-x-4">
                 {isPending ? <div className='flex w-full items-center justify-center mt-40'><Loader /></div>
                 : data.map((item: CardItem, index: number) => {
                     
@@ -59,7 +59,7 @@ export default function CardsGrid() {
                         <ProductCard 
                             key={index}
                             id={item.id} 
-                            thumbnail={item.thumbnail}
+                            thumbnail={item.images[0]}
                             title={item.title}
                             price={item.price}
                             discountPercentage={item.discountPercentage}

@@ -6,6 +6,7 @@ export interface CardItem {
     description: string;
     discountPercentage: number;
     id: number;
+    images: string[]
 }
 
 
@@ -24,7 +25,6 @@ export interface ProductCardProps {
 export interface ProductDetailsProps {
     brand: string;
     category: string;
-    description: string;
     discountPercentage: number;
     images: string[];
     price: number;
@@ -33,4 +33,20 @@ export interface ProductDetailsProps {
     stock: number;
     title: string;
     thumbnail: string;
+    reviews: [{comment: string, rating: number, date: string, reviewerName: string, reviewerEmail: string}];
+    minimumOrderQuantity: number;
+    warrantyInformation: string;
+}
+
+export interface ProductDescriptionProps {
+    description: string;
+    reviews: [{comment: string, rating: number, date: string, reviewerName: string, reviewerEmail: string}];
+    category: string;
+}
+
+export interface MayLikeProduct {
+    images: string[];
+    title: string;
+    price: number;
+    id: number;
 }
