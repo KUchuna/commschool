@@ -3,7 +3,7 @@ import profile from "/logos/profile.svg";
 import message from "/logos/message.svg";
 import orders from "/logos/orders.svg";
 import cart from "/logos/cart.svg";
-import mobilecart from "/logos/mobilecarrt.svg";
+import mobilecart from "/logos/mobilecart.svg";
 import mobileprofile from "/logos/mobileprofile.svg";
 import NavBar from "./NavBar";
 import { Link } from "react-router-dom";
