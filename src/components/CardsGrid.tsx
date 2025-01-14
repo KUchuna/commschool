@@ -8,7 +8,7 @@ import SortingBar from './SortingBar';
 
 export default function CardsGrid() {
 
-    const {productsData, searchedProducts} = useContext(ProductsContext);
+    const {productsData, searchedProducts, filteredProducts} = useContext(ProductsContext);
 
 
     const [pageLimit, setPageLimit] = useState(9);
@@ -50,30 +50,31 @@ export default function CardsGrid() {
     return (
         <section className="flex items-center justify-start flex-col gap-[1.25rem] px-5 bg-[#F7FAFC] w-full">
             <SortingBar />
-            <div className="w-full mb-[1.875rem] flex flex-wrap md:justify-between justify-center gap-y-[20px] gap-x-4">
-                {isPending ? <div className='flex w-full items-center justify-center mt-40'><Loader /></div>
-                : data.map((item: CardItem, index: number) => {
-                    
-                    const fullStars = Math.floor(item.rating);
-                    const emptyStars = 5 - fullStars;
-
-                    return (
-                        <ProductCard 
-                            key={index}
-                            id={item.id} 
-                            thumbnail={item.images[0]}
-                            title={item.title}
-                            price={item.price}
-                            discountPercentage={item.discountPercentage}
-                            rating={item.rating}
-                            description={item.description}
-                            fullStars={fullStars}
-                            emptyStars={emptyStars}
-                        />
-                    )
-                })}
+            <div className={`w-full mb-[1.875rem] ${isPending ? "flex justify-center items-center" : "grid grid-cols-3 gap-4"}`}>
+                {isPending ? (<div className='flex w-full items-center justify-center mt-40'><Loader /></div>)
+                : (
+                    (filteredProducts && filteredProducts?.length > 0 ? filteredProducts : data)?.map((item: CardItem, index: number) => {
+                        const fullStars = Math.floor(item.rating);
+                        const emptyStars = 5 - fullStars;
+                
+                        return (
+                            <ProductCard 
+                                key={index}
+                                id={item.id} 
+                                thumbnail={item.images[0]}
+                                title={item.title}
+                                price={item.price}
+                                discountPercentage={item.discountPercentage}
+                                rating={item.rating}
+                                description={item.description}
+                                fullStars={fullStars}
+                                emptyStars={emptyStars}
+                            />
+                        );
+                    })
+                )}
             </div>
-            <div className="flex max-w-[1440px] w-full gap-2">
+            {filteredProducts?.length >0 ? <></> : <div className="flex max-w-[1440px] w-full gap-2">
                 <select
                     className="ml-auto border-[1px] border-[#DEE2E7] rounded-[6px] outline-none px-[10px]"
                     id="page-size" onChange={(e) => handlePagelimit(e)} value={pageLimit}
@@ -104,7 +105,7 @@ export default function CardsGrid() {
                     }
                     <button className='single-item' onClick={() => setCurrentPage(totalPages)}>Last</button>
                 </div>
-            </div>
+            </div>}
         </section>
     );
 }
