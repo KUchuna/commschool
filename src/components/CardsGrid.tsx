@@ -48,7 +48,7 @@ export default function CardsGrid() {
     }
 
     return (
-        <section className="flex items-center justify-center flex-col gap-[1.25rem] px-5 bg-[#F7FAFC] w-full">
+        <section className="flex items-center justify-start flex-col gap-[1.25rem] px-5 bg-[#F7FAFC] w-full">
             <SortingBar />
             <div className="w-full mb-[1.875rem] flex flex-wrap md:justify-between justify-center gap-y-[20px] gap-x-4">
                 {isPending ? <div className='flex w-full items-center justify-center mt-40'><Loader /></div>

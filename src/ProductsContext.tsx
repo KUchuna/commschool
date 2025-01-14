@@ -11,6 +11,8 @@ const ProductsContext = createContext({
 export function ProductsProvider({ children }: PropsWithChildren<{}>) {
 
     const [searchedProducts, setSearchedProducts] = useState("");
+    const [selectedCategory, setSelectedCategory] = useState("")
+
 
     const fetchProducts = async (): Promise<CardItem[]> => {
 

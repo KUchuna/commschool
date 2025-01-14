@@ -12,10 +12,6 @@ export default function SortingBar() {
             <div className="flex items-center justify-between max-w-[1440px] w-full border-[1px] border-solid border-gray-200 bg-white py-[0.688rem] md:px-[0.625rem] md:rounded-lg">
                 <p className="md:block hidden">{productsData?.length} <strong>Products found</strong></p>
                 <div className="flex items-center justify-between w-full md:w-[initial] gap-[17px]">
-                    <div className="md:flex hidden gap-2 items-center">
-                        <input type="checkbox" id="verified" name="verified" />
-                        <label htmlFor="verified" className="select-none">Verified only</label>
-                    </div>
                     <select className="border-[1px] border-[#DEE2E7] p-[10px] rounded-[6px]" id="sorting">
                         <option value="default">
                             Default
