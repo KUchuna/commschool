@@ -15,6 +15,10 @@ body, html {
   height: 100%;
 }
 
+#sidebar-ul {
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
 
 #root {
   height: 100%;
@@ -71,7 +75,7 @@ body, html {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 32%;
+  width: 100%;
 }
 
 .card-title {

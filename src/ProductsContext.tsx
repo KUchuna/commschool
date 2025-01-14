@@ -5,12 +5,18 @@ import { CardItem } from "./types";
 const ProductsContext = createContext({
     productsData: [] as CardItem[] | undefined,
     setSearchedProducts: (searchedProducts: string) => {searchedProducts},
+    setFilteredProducts: (filteredProducts: []) => {filteredProducts},
+    filteredProducts: [],
     searchedProducts: ""
 });
 
 export function ProductsProvider({ children }: PropsWithChildren<{}>) {
 
     const [searchedProducts, setSearchedProducts] = useState("");
+    
+    const [filteredProducts, setFilteredProducts] = useState([])
+
+
 
     const fetchProducts = async (): Promise<CardItem[]> => {
 
@@ -34,6 +40,8 @@ export function ProductsProvider({ children }: PropsWithChildren<{}>) {
         <ProductsContext.Provider value={{
             productsData: data,
             setSearchedProducts,
+            setFilteredProducts,
+            filteredProducts,
             searchedProducts
         }}>
             {children}

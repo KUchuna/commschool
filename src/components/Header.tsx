@@ -3,7 +3,7 @@ import profile from "/logos/profile.svg";
 import message from "/logos/message.svg";
 import orders from "/logos/orders.svg";
 import cart from "/logos/cart.svg";
-import mobilecart from "/logos/mobilecarrt.svg";
+import mobilecart from "/logos/mobilecart.svg";
 import mobileprofile from "/logos/mobileprofile.svg";
 import NavBar from "./NavBar";
 import { Link } from "react-router-dom";
@@ -25,12 +25,6 @@ export default function Header({productPage}: {productPage?: boolean}) {
                     {productPage ? <></> : <div className="w-[50%] md:flex hidden border-primary border-[2px] rounded-lg">
                         <input type="text" name="search" id="search" value={searchedProducts} onChange={(e) => setSearchedProducts(e.target.value)}
                         placeholder="Search" className="w-full rounded-l-lg border-r-[1px] border-primary px-[10px] outline-none"/>
-                        {/* <select className="outline-none mx-[10px]">
-                            <option>All</option>
-                            <option>Mobile phones</option>
-                            <option>Clothes</option>
-                            <option>Footwear</option>
-                        </select> */}
                         <button className="bg-primary text-white px-[23px] py-[11px]" onClick={() => setSearchedProducts('')}>
                             Clear
                         </button>

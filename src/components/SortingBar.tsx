@@ -5,17 +5,13 @@ import ProductsContext from "../ProductsContext";
 
 export default function SortingBar() { 
 
-    const {productsData} = useContext(ProductsContext);
+    const {productsData, filteredProducts} = useContext(ProductsContext);
 
     return (
-        <div className="flex items-center justify-center md:px-[8.125rem] px-5 bg-[#F7FAFC]">
+        <div className="flex items-center justify-center w-full bg-[#F7FAFC]">
             <div className="flex items-center justify-between max-w-[1440px] w-full border-[1px] border-solid border-gray-200 bg-white py-[0.688rem] md:px-[0.625rem] md:rounded-lg">
-                <p className="md:block hidden">{productsData?.length} <strong>Products found</strong></p>
+                <p className="md:block hidden">{filteredProducts?.length > 0 ? filteredProducts.length : productsData?.length} <strong>Products found</strong></p>
                 <div className="flex items-center justify-between w-full md:w-[initial] gap-[17px]">
-                    <div className="md:flex hidden gap-2 items-center">
-                        <input type="checkbox" id="verified" name="verified" />
-                        <label htmlFor="verified" className="select-none">Verified only</label>
-                    </div>
                     <select className="border-[1px] border-[#DEE2E7] p-[10px] rounded-[6px]" id="sorting">
                         <option value="default">
                             Default
