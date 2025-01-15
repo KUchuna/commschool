@@ -2,17 +2,31 @@ import { useContext } from "react";
 import grid from "/logos/grid.svg";
 import list from "/logos/list.svg";
 import ProductsContext from "../ProductsContext";
+import { useSearchParams } from "react-router-dom";
 
 export default function SortingBar() { 
 
     const {productsData, filteredProducts} = useContext(ProductsContext);
+
+    const [_, setParams] = useSearchParams()
+
+
+
+    function handleSorting(e: React.ChangeEvent<HTMLSelectElement>) {
+        if (e.target.value === "default") {
+            setParams("");
+            return;
+        }
+        setParams({sorting: e.target.value});
+    }
+
 
     return (
         <div className="flex items-center justify-center w-full bg-[#F7FAFC]">
             <div className="flex items-center justify-between max-w-[1440px] w-full border-[1px] border-solid border-gray-200 bg-white py-[0.688rem] md:px-[0.625rem] md:rounded-lg">
                 <p className="md:block hidden">{filteredProducts?.length > 0 ? filteredProducts.length : productsData?.length} <strong>Products found</strong></p>
                 <div className="flex items-center justify-between w-full md:w-[initial] gap-[17px]">
-                    <select className="border-[1px] border-[#DEE2E7] p-[10px] rounded-[6px]" id="sorting">
+                    <select className="border-[1px] border-[#DEE2E7] p-[10px] rounded-[6px]" id="sorting" onChange={(e) => handleSorting(e)}>
                         <option value="default">
                             Default
                         </option>
@@ -21,6 +35,12 @@ export default function SortingBar() {
                         </option>
                         <option value="price-descending">
                             Price descending
+                        </option>
+                        <option value="name-ascending">
+                            Name ascending
+                        </option>
+                        <option value="name-descending">
+                            Name descending
                         </option>
                         <option value="top-rating">
                             Top rating

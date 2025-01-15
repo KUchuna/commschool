@@ -42,7 +42,7 @@ export default function ProductCard(props: ProductCardProps) {
                         <img src="/logos/heart.svg" alt="Favorite Icon" />
                     </div>
                 </div>
-                <p className="card-description">{props.description.slice(0, 80)}...</p>
+                <p className="card-description">{props.description.slice(0, 60)}...</p>
             </div>
         </Link>
     )
