@@ -93,9 +93,9 @@ export default function ProductDetails(props: ProductDetailsProps) {
                             <li className="text-gray-2">Return Policy:</li>
                             <li className="text-gray-2">Warranty Information:</li>
                         </ul>
-                        <ul className="flex flex-col gap-3">
-                            <li className="text-dark">{props.brand}</li>
-                            <li className="text-dark">{props.category}</li>
+                        <ul className="flex flex-col gap-3 items-start h-full">
+                            {props.brand ? <li className="text-dark">{props.brand}</li> : <li>N/A</li>}
+                            <li className="text-dark first-letter:uppercase">{props.category}</li>
                             <li className="text-dark">{props.returnPolicy}</li>
                             <li className="text-dark">{props.warrantyInformation}</li>
                         </ul>
