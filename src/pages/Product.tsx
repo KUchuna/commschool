@@ -27,9 +27,9 @@ export default function Product() {
 
     return (
         <>
-            <Header 
+              <Header 
                 productPage
-            />
+              />
             {isPending ? (<div className="flex justify-center w-full h-full items-center"><Loader /></div>) :
             data && 
             <>
