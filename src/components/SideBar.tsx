@@ -84,11 +84,18 @@ export default function SideBar() {
 
     isError && console.log(error)
 
-    setFilteredProducts(data)
+    data && setFilteredProducts(data)
+
+
+    function handleCategoryClear() {
+        setSelectedCategory("")
+        setFilteredProducts([])
+    }
+
 
     return (
         <div className="max-w-[230px] w-full">
-            {selectedCategory != "" ? <button className="bg-primary text-white px-[23px] py-[11px] rounded-[6px] mb-4 w-full" onClick={() => setSelectedCategory("")}>
+            {selectedCategory != "" ? <button className="bg-primary text-white px-[23px] py-[11px] rounded-[6px] mb-4 w-full" onClick={() => handleCategoryClear()}>
                 Clear
             </button> : <></>}
             {accordionItems.map((item, index) => {

@@ -16,7 +16,7 @@ export function ProductsProvider({ children }: PropsWithChildren<{}>) {
     
     const [filteredProducts, setFilteredProducts] = useState([])
 
-
+    
 
     const fetchProducts = async (): Promise<CardItem[]> => {
 

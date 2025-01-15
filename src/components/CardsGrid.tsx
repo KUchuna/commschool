@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from 'react';
 import ProductCard from './ProductCard';
 import ProductsContext from '../ProductsContext';
 import SortingBar from './SortingBar';
+import { useSearchParams } from 'react-router-dom';
 
 export default function CardsGrid() {
 
@@ -15,14 +16,19 @@ export default function CardsGrid() {
     const [totalPages, setTotalPages] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
 
+    const [params, _] = useSearchParams();
+
+    const sortingSelected = params.get("sorting");
+
     useEffect(() => {
         productsData && setTotalPages(Math.ceil(productsData.length/pageLimit));
     }, [productsData, pageLimit]);
 
+
     const fetchProducts = async (): Promise<CardItem[]> => {
         return new Promise((resolve) => {
             setTimeout(async () => {
-                const response = await fetch(`https://dummyjson.com/products/search?q=${searchedProducts}&limit=${pageLimit}&skip=${pageLimit*(currentPage-1)}`);
+                const response = await fetch(`https://dummyjson.com/products/search?q=${searchedProducts}&limit=${sortingSelected ? "1000" : pageLimit}&skip=${pageLimit*(currentPage-1)}`);
                 const data = await response.json();
                 resolve(data.products);
             }, 500);
@@ -30,13 +36,45 @@ export default function CardsGrid() {
     };
 
     const { isPending, isError, data, error } = useQuery({
-        queryKey: ['products', pageLimit, currentPage, searchedProducts],
+        queryKey: ['searched-products', pageLimit, currentPage, searchedProducts, sortingSelected],
         queryFn: fetchProducts,
     })
 
     if (isError) {
     return <span>Error: {error.message}</span>
     }
+
+
+    
+
+    function sortProducts(products: CardItem[] | undefined, criteria: string | null): CardItem[] {
+        if (!products) return [];
+
+        switch (criteria) {
+            case "price-ascending":
+                return [...products].sort((a, b) => a.price - b.price);
+            case "price-descending":
+                return [...products].sort((a, b) => b.price - a.price);
+            case "least-rating":
+                return [...products].sort((a, b) => a.rating - b.rating);
+            case "top-rating":
+                return [...products].sort((a, b) => b.rating - a.rating);
+            case "name-ascending":
+                return [...products].sort((a, b) => a.title.localeCompare(b.title));
+            case "name-descending":
+                return [...products].sort((a, b) => b.title.localeCompare(a.title));
+            default:
+                return products;
+        }
+    }
+
+    const productsToSort: CardItem[] | undefined = filteredProducts?.length
+        ? filteredProducts
+        : data;
+
+    const sortedProducts = sortProducts(productsToSort, sortingSelected);
+
+    
 
     function handlePagelimit(e: React.ChangeEvent<HTMLSelectElement>) {
         setPageLimit(parseInt(e.target.value));
@@ -53,7 +91,7 @@ export default function CardsGrid() {
             <div className={`w-full mb-[1.875rem] ${isPending ? "flex justify-center items-center" : "grid grid-cols-3 gap-4"}`}>
                 {isPending ? (<div className='flex w-full items-center justify-center mt-40'><Loader /></div>)
                 : (
-                    (filteredProducts && filteredProducts?.length > 0 ? filteredProducts : data)?.map((item: CardItem, index: number) => {
+                    (sortedProducts.length ? sortedProducts : (data ? data : productsToSort))?.map((item: CardItem, index: number) => {
                         const fullStars = Math.floor(item.rating);
                         const emptyStars = 5 - fullStars;
                 
@@ -74,7 +112,7 @@ export default function CardsGrid() {
                     })
                 )}
             </div>
-            {filteredProducts?.length >0 ? <></> : <div className="flex max-w-[1440px] w-full gap-2">
+            {filteredProducts?.length >0 ? <></> : (<div className="flex max-w-[1440px] w-full gap-2">
                 <select
                     className="ml-auto border-[1px] border-[#DEE2E7] rounded-[6px] outline-none px-[10px]"
                     id="page-size" onChange={(e) => handlePagelimit(e)} value={pageLimit}
@@ -105,7 +143,7 @@ export default function CardsGrid() {
                     }
                     <button className='single-item' onClick={() => setCurrentPage(totalPages)}>Last</button>
                 </div>
-            </div>}
+            </div>)}
         </section>
     );
 }
